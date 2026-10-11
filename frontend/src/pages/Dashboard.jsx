@@ -1108,10 +1108,10 @@ export default function Dashboard() {
         </div>
       )}
       <Helmet>
-        <title>Farmer Dashboard – Farmers Marketplace</title>
+        <title>Farmer Dashboard – GoGreen</title>
         <meta
           name="description"
-          content="Manage your product listings, track sales, and grow your farm business on Farmers Marketplace."
+          content="Manage your product listings, track sales, and grow your farm business on GoGreen."
         />
       </Helmet>
       <div

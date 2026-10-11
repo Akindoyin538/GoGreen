@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Farmers Marketplace API implements a multi-tiered rate limiting strategy to prevent abuse while ensuring legitimate users can access the service efficiently. Different endpoints use different rate limiting approaches based on their security requirements.
+The GoGreen API implements a multi-tiered rate limiting strategy to prevent abuse while ensuring legitimate users can access the service efficiently. Different endpoints use different rate limiting approaches based on their security requirements.
 
 ## Rate Limiting Types
 

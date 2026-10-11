@@ -647,8 +647,8 @@ router.post('/recover', validate.recover, async (req, res) => {
 router.post('/2fa/setup', auth, async (req, res) => {
   try {
     const secret = speakeasy.generateSecret({
-      name: `Farmers Marketplace (${req.user.id})`,
-      issuer: 'Farmers Marketplace',
+      name: `GoGreen (${req.user.id})`,
+      issuer: 'GoGreen',
       length: 32,
     });
 

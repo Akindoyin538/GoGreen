@@ -793,7 +793,7 @@ export default function Marketplace() {
         Skip to products
       </a>
       <Helmet>
-        <title>Marketplace – Farmers Marketplace</title>
+        <title>Marketplace – GoGreen</title>
         <meta name="description" content="Browse fresh produce from local farmers. Buy vegetables, fruits, grains, dairy and more directly from the source." />
       </Helmet>
       <div

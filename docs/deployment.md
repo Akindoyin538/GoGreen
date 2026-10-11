@@ -1,4 +1,4 @@
-# FarmersMarketplace — Production Deployment Guide
+# GoGreen — Production Deployment Guide
 
 Target OS: Ubuntu 22.04 LTS
 Backend: Express.js on port **4000**
@@ -64,8 +64,8 @@ sudo systemctl enable postgresql
 sudo systemctl start postgresql
 
 # Create database and user
-sudo -u postgres psql -c "CREATE USER farmersmarket WITH PASSWORD 'your_db_password';"
-sudo -u postgres psql -c "CREATE DATABASE farmersmarketplace OWNER farmersmarket;"
+sudo -u postgres psql -c "CREATE USER gogreen WITH PASSWORD 'your_db_password';"
+sudo -u postgres psql -c "CREATE DATABASE gogreen OWNER gogreen;"
 ```
 
 ---
@@ -76,32 +76,32 @@ sudo -u postgres psql -c "CREATE DATABASE farmersmarketplace OWNER farmersmarket
 
 ```bash
 cd /var/www
-sudo mkdir -p farmers-marketplace
-sudo chown $USER:$USER farmers-marketplace
-git clone https://github.com/your-org/FarmersMarketplace.git farmers-marketplace
-cd farmers-marketplace
+sudo mkdir -p gogreen
+sudo chown $USER:$USER gogreen
+git clone https://github.com/ITSYABOINEUTRAL/GoGreen.git gogreen
+cd gogreen
 ```
 
 ### Install backend dependencies
 
 ```bash
-cd /var/www/farmers-marketplace/backend
+cd /var/www/gogreen/backend
 npm install --omit=dev
 ```
 
 ### Install frontend dependencies and build
 
 ```bash
-cd /var/www/farmers-marketplace/frontend
+cd /var/www/gogreen/frontend
 npm install --omit=dev
 npm run build
-# Built assets are output to /var/www/farmers-marketplace/frontend/dist/
+# Built assets are output to /var/www/gogreen/frontend/dist/
 ```
 
 ### Set up environment variables
 
 ```bash
-cd /var/www/farmers-marketplace/backend
+cd /var/www/gogreen/backend
 cp .env.example .env
 nano .env   # fill in all required values — see Section 6
 ```
@@ -111,7 +111,7 @@ Minimum required changes for production:
 ```bash
 NODE_ENV=production
 PORT=4000
-DATABASE_URL=postgresql://farmersmarket:your_db_password@localhost:5432/farmersmarketplace
+DATABASE_URL=postgresql://gogreen:your_db_password@localhost:5432/gogreen
 JWT_SECRET=<64-byte hex — generate with: node -e "console.log(require('crypto').randomBytes(64).toString('hex'))">
 REFRESH_TOKEN_SECRET=<64-byte hex — same method>
 CLIENT_ORIGIN=https://yourdomain.com
@@ -127,20 +127,20 @@ STELLAR_MAINNET_CONFIRMED=true
 ### Create the logs directory
 
 ```bash
-mkdir -p /var/www/farmers-marketplace/logs
+mkdir -p /var/www/gogreen/logs
 ```
 
 ### Run database migrations
 
 ```bash
-cd /var/www/farmers-marketplace/backend
+cd /var/www/gogreen/backend
 node migrate.js
 ```
 
 ### (Optional) Seed the admin account
 
 ```bash
-cd /var/www/farmers-marketplace/backend
+cd /var/www/gogreen/backend
 node scripts/seed-admin.js
 # Uses ADMIN_NAME, ADMIN_EMAIL, ADMIN_PASSWORD from .env
 # Change the admin password immediately after first login.
@@ -153,10 +153,10 @@ node scripts/seed-admin.js
 ### Start the application
 
 ```bash
-cd /var/www/farmers-marketplace
+cd /var/www/gogreen
 pm2 start ecosystem.config.js
-pm2 list   # verify farmers-marketplace is online
-pm2 logs farmers-marketplace --lines 50   # check for startup errors
+pm2 list   # verify gogreen is online
+pm2 logs gogreen --lines 50   # check for startup errors
 ```
 
 ### Configure PM2 to auto-start on server reboot
@@ -175,10 +175,10 @@ pm2 save   # persists the current process list
 
 ```bash
 pm2 status                          # overview of all processes
-pm2 logs farmers-marketplace        # tail live logs
-pm2 reload farmers-marketplace      # zero-downtime reload
-pm2 restart farmers-marketplace     # full restart
-pm2 stop farmers-marketplace        # stop without removing
+pm2 logs gogreen        # tail live logs
+pm2 reload gogreen      # zero-downtime reload
+pm2 restart gogreen     # full restart
+pm2 stop gogreen        # stop without removing
 pm2 monit                           # real-time dashboard
 ```
 
@@ -189,11 +189,11 @@ pm2 monit                           # real-time dashboard
 ### Copy the config and enable the site
 
 ```bash
-sudo cp /var/www/farmers-marketplace/nginx/farmers-marketplace.conf \
-        /etc/nginx/sites-available/farmers-marketplace.conf
+sudo cp /var/www/gogreen/nginx/gogreen.conf \
+        /etc/nginx/sites-available/gogreen.conf
 
-sudo ln -s /etc/nginx/sites-available/farmers-marketplace.conf \
-           /etc/nginx/sites-enabled/farmers-marketplace.conf
+sudo ln -s /etc/nginx/sites-available/gogreen.conf \
+           /etc/nginx/sites-enabled/gogreen.conf
 
 # Remove the default site if present
 sudo rm -f /etc/nginx/sites-enabled/default
@@ -233,7 +233,7 @@ sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com \
   --non-interactive --agree-tos -m admin@yourdomain.com
 ```
 
-Certbot will automatically edit `/etc/nginx/sites-available/farmers-marketplace.conf`
+Certbot will automatically edit `/etc/nginx/sites-available/gogreen.conf`
 and add the HTTPS server block. The resulting config will look like:
 
 ```nginx
@@ -274,7 +274,7 @@ sudo systemctl status certbot.timer
 
 ## 6. Environment Variables Reference
 
-All variables are set in `/var/www/farmers-marketplace/backend/.env`.
+All variables are set in `/var/www/gogreen/backend/.env`.
 
 ### Core (Required)
 
@@ -282,7 +282,7 @@ All variables are set in `/var/www/farmers-marketplace/backend/.env`.
 |---|---|---|
 | `NODE_ENV` | `production` | Must be `production` in prod — never `development` |
 | `PORT` | `4000` | Port the Express server listens on |
-| `DATABASE_URL` | `postgresql://user:pass@localhost:5432/farmersmarketplace` | Leave unset to use SQLite (not recommended for prod) |
+| `DATABASE_URL` | `postgresql://user:pass@localhost:5432/gogreen` | Leave unset to use SQLite (not recommended for prod) |
 | `JWT_SECRET` | _(64-byte random hex)_ | Generate: `node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"` |
 | `REFRESH_TOKEN_SECRET` | _(64-byte random hex)_ | Generate same way as `JWT_SECRET`; must differ |
 
@@ -362,7 +362,7 @@ All variables are set in `/var/www/farmers-marketplace/backend/.env`.
 | Variable | Default | Notes |
 |---|---|---|
 | `ADMIN_NAME` | `Admin` | Used only by `node scripts/seed-admin.js` |
-| `ADMIN_EMAIL` | `admin@farmersmarketplace.com` | Change before running seed script |
+| `ADMIN_EMAIL` | `admin@gogreen.com` | Change before running seed script |
 | `ADMIN_PASSWORD` | `ChangeMe1!` | **Change immediately after seeding** |
 
 ---
@@ -373,7 +373,7 @@ Use these steps to roll back to a previously released Git tag (e.g. `v1.2.3`).
 
 ```bash
 # 1. Navigate to the app root
-cd /var/www/farmers-marketplace
+cd /var/www/gogreen
 
 # 2. Fetch the latest tags and branches from origin
 git fetch --tags origin
@@ -385,7 +385,7 @@ git tag --sort=-version:refname | head -20
 git checkout v1.2.3
 
 # 5. Install backend dependencies for this version
-cd /var/www/farmers-marketplace/backend
+cd /var/www/gogreen/backend
 npm install --omit=dev
 
 # 6. Run any pending (or rollback) migrations
@@ -394,20 +394,20 @@ node migrate.js rollback   # roll back the most recent migration batch
 # Verify the schema is as expected before proceeding.
 
 # 7. Rebuild the frontend
-cd /var/www/farmers-marketplace/frontend
+cd /var/www/gogreen/frontend
 npm install --omit=dev
 npm run build
 
 # 8. Reload the backend with zero downtime
-pm2 reload farmers-marketplace
+pm2 reload gogreen
 
 # 9. Verify the application is healthy
 pm2 status
-pm2 logs farmers-marketplace --lines 50
+pm2 logs gogreen --lines 50
 curl -s https://yourdomain.com/api/health | head -5
 
 # 10. If the reload fails, force a full restart
-pm2 restart farmers-marketplace
+pm2 restart gogreen
 ```
 
 > **Tip:** Tag every release with `git tag v1.x.x && git push origin v1.x.x` so

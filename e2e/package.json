@@ -1,5 +1,5 @@
 {
-  "name": "farmers-marketplace-e2e",
+  "name": "gogreen-e2e",
   "private": true,
   "scripts": {
     "e2e": "playwright test",

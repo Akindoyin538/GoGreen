@@ -80,8 +80,8 @@ export function LoginPage() {
   return (
     <div style={s.wrap}>
       <Helmet>
-        <title>Login – Farmers Marketplace</title>
-        <meta name="description" content="Sign in to your Farmers Marketplace account." />
+        <title>Login – GoGreen</title>
+        <meta name="description" content="Sign in to your GoGreen account." />
       </Helmet>
       <div style={s.card}>
         <div style={s.title}>{t('auth.welcomeBack')}</div>
@@ -147,8 +147,8 @@ export function RegisterPage() {
   return (
     <div style={s.wrap}>
       <Helmet>
-        <title>Register – Farmers Marketplace</title>
-        <meta name="description" content="Create a free account on Farmers Marketplace to buy fresh produce or sell your farm products." />
+        <title>Register – GoGreen</title>
+        <meta name="description" content="Create a free account on GoGreen to buy fresh produce or sell your farm products." />
       </Helmet>
       <div style={s.card}>
         <div style={s.title}>{t('auth.createAccount')}</div>

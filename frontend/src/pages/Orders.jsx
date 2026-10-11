@@ -363,8 +363,8 @@ export default function Orders() {
   return (
     <div style={s.page}>
       <Helmet>
-        <title>My Orders – Farmers Marketplace</title>
-        <meta name="description" content="View and track your orders on Farmers Marketplace." />
+        <title>My Orders – GoGreen</title>
+        <meta name="description" content="View and track your orders on GoGreen." />
       </Helmet>
       <div style={s.title}>📦 My Orders</div>
       <div style={s.sub}>Track your purchases and verify transactions</div>

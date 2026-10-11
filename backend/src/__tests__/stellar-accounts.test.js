@@ -369,11 +369,11 @@ describe('stellar-accounts.js — lookupFederationAddress', () => {
 
   it('returns federation address when found', async () => {
     StellarSdk.FederationServer.resolve.mockResolvedValueOnce({
-      stellar_address: 'alice*farmersmarket.io',
+      stellar_address: 'alice*gogreen.io',
     });
 
     const result = await lookupFederationAddress('GPUBKEY123');
-    expect(result).toBe('alice*farmersmarket.io');
+    expect(result).toBe('alice*gogreen.io');
   });
 
   it('returns null when federation address not found', async () => {
@@ -390,13 +390,13 @@ describe('stellar-accounts.js — lookupFederationAddress', () => {
 
   it('caches results for 10 minutes', async () => {
     StellarSdk.FederationServer.resolve.mockResolvedValueOnce({
-      stellar_address: 'alice*farmersmarket.io',
+      stellar_address: 'alice*gogreen.io',
     });
 
     await lookupFederationAddress('GPUBKEY123');
     const cachedResult = await lookupFederationAddress('GPUBKEY123');
 
-    expect(cachedResult).toBe('alice*farmersmarket.io');
+    expect(cachedResult).toBe('alice*gogreen.io');
     expect(StellarSdk.FederationServer.resolve).toHaveBeenCalledTimes(1);
   });
 });

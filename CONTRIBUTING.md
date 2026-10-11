@@ -1,4 +1,4 @@
-# Contributing to Farmers Marketplace
+# Contributing to GoGreen
 
 Thank you for your interest in contributing! This guide covers everything you need to get started.
 

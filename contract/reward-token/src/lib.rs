@@ -1,4 +1,4 @@
-//! Farmers Marketplace Reward Token (FRT)
+//! GoGreen Reward Token (FRT)
 //!
 //! SEP-0041 compliant Soroban fungible token for marketplace rewards.
 //!

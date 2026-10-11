@@ -1,10 +1,10 @@
-// PM2 ecosystem config for FarmersMarketplace
+// PM2 ecosystem config for GoGreen
 // Usage:
 //   pm2 start ecosystem.config.js          # start
-//   pm2 reload farmers-marketplace         # zero-downtime reload
-//   pm2 restart farmers-marketplace        # full restart
-//   pm2 stop farmers-marketplace           # stop
-//   pm2 logs farmers-marketplace           # tail logs
+//   pm2 reload gogreen         # zero-downtime reload
+//   pm2 restart gogreen        # full restart
+//   pm2 stop gogreen           # stop
+//   pm2 logs gogreen           # tail logs
 //
 // After first start, run:
 //   pm2 startup    (follow the printed command)
@@ -18,7 +18,7 @@ module.exports = {
       // ----------------------------------------------------------------
       // Backend — Express API server (port 4000)
       // ----------------------------------------------------------------
-      name: 'farmers-marketplace',
+      name: 'gogreen',
       script: 'src/index.js',
       cwd: './backend',
 

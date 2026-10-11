@@ -33,7 +33,7 @@ const EnvSchema = z.object({
   FRONTEND_URL: z.string().default('http://localhost:5173'),
   BACKEND_URL: z.string().default('http://localhost:4000'),
   CORS_ORIGIN: z.string().optional(),
-  FEDERATION_DOMAIN: z.string().default('farmersmarket.io'),
+  FEDERATION_DOMAIN: z.string().default('gogreen.io'),
 
   // Logging
   LOG_LEVEL: z.enum(['error', 'warn', 'info', 'debug']).default('info'),
@@ -84,7 +84,7 @@ const EnvSchema = z.object({
   // Web Push
   WEB_PUSH_VAPID_PUBLIC_KEY: z.string().optional(),
   WEB_PUSH_VAPID_PRIVATE_KEY: z.string().optional(),
-  WEB_PUSH_VAPID_SUBJECT: z.string().default('mailto:admin@farmersmarketplace.com'),
+  WEB_PUSH_VAPID_SUBJECT: z.string().default('mailto:admin@gogreen.com'),
 
   // Proxy
   TRUST_PROXY: z.string().optional(),

@@ -1,5 +1,5 @@
 -- Migration: 001_initial_schema
--- Description: Full initial schema for FarmersMarketplace
+-- Description: Full initial schema for GoGreen
 
 CREATE TABLE IF NOT EXISTS users (
   id                  INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -1,5 +1,5 @@
 {
-  "name": "farmers-marketplace-frontend",
+  "name": "gogreen-frontend",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",

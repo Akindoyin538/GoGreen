@@ -429,7 +429,7 @@ export default function Wallet() {
   return (
     <div style={s.page}>
       <Helmet>
-        <title>My Wallet – Farmers Marketplace</title>
+        <title>My Wallet – GoGreen</title>
         <meta name="description" content="Manage your Stellar XLM wallet, view balance and transaction history." />
       </Helmet>
       <Toast toasts={toasts} usd={usd} />
