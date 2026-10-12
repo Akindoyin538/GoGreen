@@ -131,8 +131,24 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Rust
-        env:
-          ESLINT_USE_FLAT_CONFIG: 'false'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Cache cargo + target
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.cargo/registry
+            contracts/escrow/target
+          key: ${{ runner.os }}-escrow-smoke-${{ hashFiles('contracts/escrow/Cargo.lock') }}
+
+      - name: Install Stellar CLI
+        run: command -v stellar >/dev/null || cargo install --locked stellar-cli
+
+      - name: Run smoke test (deposit -> release -> verify Horizon event)
+        run: ./cli.sh smoke-test
 
   soroban-contracts:
     name: Soroban Contract Tests
